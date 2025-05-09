@@ -179,7 +179,7 @@ export class SbTestingRenderer {
 
   constructor(public storyId: string) { }
 
-  public getRenderableComponent({
+  public async getRenderableComponent({
     storyFnAngular,
     forced,
     // parameters
@@ -191,10 +191,10 @@ export class SbTestingRenderer {
     // parameters: Parameters;
     component?: any;
     targetDOMNode: HTMLElement;
-  }): {
+  }): Promise<{
     component: Type<any> | null;
     applicationConfig: ApplicationConfig;
-  } | null {
+  } | null> {
     const targetSelector = this.generateTargetSelectorFromStoryId(targetDOMNode.id);
 
     const newStoryProps$ = new BehaviorSubject<ICollection | undefined>(storyFnAngular.props ?? {});
@@ -223,6 +223,7 @@ export class SbTestingRenderer {
     this.storyProps$ = newStoryProps$;
 
     const analyzedMetadata = new PropertyExtractor(storyFnAngular.moduleMetadata || {}, storyComponent);
+    await analyzedMetadata.init()
 
     return {
       component: getApplication({
@@ -316,7 +317,7 @@ export class SbTestingRenderer {
  * @param story 
  * @returns 
  */
-export function createMountableStoryComponent(storyFnReturn: StoryFnAngularReturnType, component?: any): RenderableStoryAndModule {
+export async function createMountableStoryComponent(storyFnReturn: StoryFnAngularReturnType, component?: any): Promise<RenderableStoryAndModule >{
   const storyId = `storybook-testing-wrapper`;
   const renderer = new SbTestingRenderer(storyId);
 
@@ -345,7 +346,7 @@ export function createMountableStoryComponent(storyFnReturn: StoryFnAngularRetur
   };
 
 
-  const _module = renderer.getRenderableComponent({
+  const _module = await renderer.getRenderableComponent({
     storyFnAngular: _story,
     forced: false,
     // parameters: {} as any,
@@ -396,6 +397,6 @@ export function createMountableStoryComponent(storyFnReturn: StoryFnAngularRetur
 /**
  * Function that will receive a StoryFnAngularReturnType and will return a Component and NgModule that renders the story.
  */
-export function createMountable(storyFnReturn: StoryFnAngularReturnType): RenderableStoryAndModule {
+export async function createMountable(storyFnReturn: StoryFnAngularReturnType): Promise<RenderableStoryAndModule >{
   return createMountableStoryComponent(storyFnReturn);
 }

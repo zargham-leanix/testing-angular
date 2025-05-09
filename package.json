@@ -1,6 +1,6 @@
 {
-  "name": "@storybook/testing-angular",
-  "version": "1.0.3",
+  "name": "@zargham-leanix/testing-angular",
+  "version": "2.0.0",
   "description": "Testing utilities that allow you to reuse your stories in your unit tests",
   "keywords": [
     "storybook-addons",
@@ -12,7 +12,7 @@
   "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/testing-angular"
+    "url": "https://github.com/zargham-leanix/testing-angular"
   },
   "files": [
     "dist",
@@ -74,9 +74,10 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@storybook/angular": "^8.1.5",
-    "@storybook/preview-api": "^8.1.5",
-    "@storybook/types": "^8.1.5"
+    "storybook": "^8.6.12",
+    "@storybook/angular": "^8.6.12",
+    "@storybook/preview-api": "^8.6.12",
+    "@storybook/types": "^8.6.12"
   },
   "resolutions": {
     "**/typescript": "^5.4.5"
