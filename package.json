@@ -74,9 +74,9 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@storybook/angular": "^8.1.5",
-    "@storybook/preview-api": "^8.1.5",
-    "@storybook/types": "^8.1.5"
+    "@storybook/angular": "^8.6.12",
+    "@storybook/preview-api": "^8.6.12",
+    "@storybook/types": "^8.6.12"
   },
   "resolutions": {
     "**/typescript": "^5.4.5"
